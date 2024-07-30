@@ -1,0 +1,406 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.admin-dashboard.expanded {
+    width: 270px;
+    
+    
+  }
+  .admin-dashboard {
+    transition: width 1.8s;
+  }
+
+  
+  .admin-dashboard .ant-menu-item-selected {
+    background-color: transparent !important; /* Set the selected item background color */
+color: white !important;  
+} 
+
+.admin-dashboard ul li{
+    color: white !important;
+}
+  
+  .admin-dashboard .ant-menu-submenu-title {
+    color: white !important; /* Set the submenu title background color */
+  }
+
+
+  .sales .apexcharts-zoomin-icon{
+    display: none !important;
+  }
+
+  .sales .apexcharts-zoomout-icon{
+    display: none !important;
+  }
+
+  .sales .apexcharts-reset-icon{
+    display: none !important;
+  }
+
+  .sales .apexcharts-zoom-icon {
+    display: none !important;
+  }
+
+  .sales .apexcharts-pan-icon{
+    display: none;
+  }
+
+
+
+
+.category-dropdown .ant-dropdown-menu-submenu-expand-icon {
+  display: none !important;
+}
+
+:hover.mg-ten{
+  background: rgb(18, 152, 81) !important;
+  color: white !important;
+}
+
+.homesearch .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  color: white !important;
+  background-color: green !important;
+}
+
+.homesearch .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  color: white !important;
+  background-color: darkgreen !important;
+}
+
+
+
+
+
+.sliderone .slick-prev,
+.sliderone .slick-next {
+  width: 50px; /* Set a width if necessary */
+  height: 50px; /* Set a height if necessary */
+  background: transparent; /* Remove default background */
+  border: none; /* Remove default border */
+  z-index: 1; /* Ensure arrows are on top of the slider */
+}
+
+.sliderone .slick-prev:before,
+.sliderone .slick-next:before {
+  display: none !important; /* Hide default arrow icon */
+}
+
+.sliderone .slick-prev {
+  left: 20px;
+  z-index: 1; 
+  background: rgb(252, 253, 252); 
+  
+}
+
+.sliderone .slick-next {
+  right: 20px;
+  
+  z-index: 1;
+  
+  background: green; 
+  
+}
+
+
+.sliderone .slick-dots{
+  display: none !important;
+}
+
+
+/* ====slider modals====== */
+
+.slidermodals .slick-prev,
+.slidermodals .slick-next {
+  width: 50px; /* Set a width if necessary */
+  height: 50px; /* Set a height if necessary */
+  background: transparent; /* Remove default background */
+  border: none; /* Remove default border */
+  z-index: 1; /* Ensure arrows are on top of the slider */
+}
+
+.slidermodals .slick-prev:before,
+.slidermodals .slick-next:before {
+  display: none !important; /* Hide default arrow icon */
+}
+
+.slidermodals .slick-prev {
+  left: 10px;
+  z-index: 1; 
+  background: rgb(252, 253, 252); 
+  
+}
+
+.slidermodals .slick-next {
+  right: -10px;
+  
+  z-index: 1;
+  
+  background: green; 
+  
+}
+
+
+.slidermodals .slick-dots{
+  display: none !important;
+}
+
+/* slidermodals */
+
+
+.slidertwo .slick-prev,
+.slidertwo .slick-next {
+  width: 50px; /* Set a width if necessary */
+  height: 50px; /* Set a height if necessary */
+  background: transparent; /* Remove default background */
+  border: none; /* Remove default border */
+  z-index: 1; /* Ensure arrows are on top of the slider */
+}
+
+.slidertwo .slick-prev:before,
+.slidertwo .slick-next:before {
+  display: none; /* Hide default arrow icon */
+}
+
+.slidertwo .slick-prev {
+  left: 3px;
+  z-index: 1; 
+  background: rgb(252, 253, 252); 
+  top: 50%;
+}
+
+.slidertwo .slick-next {
+
+  top: 50%;
+
+  z-index: 1;
+  right: -17px;
+  
+  background: green; 
+  
+}
+
+.slidertwo .slick-dots{
+  display: none !important;
+}
+
+
+
+
+
+
+
+.slidertwovideo .slick-prev,
+.slidertwovideo .slick-next {
+  width: 50px; /* Set a width if necessary */
+  height: 50px; /* Set a height if necessary */
+  background: transparent; /* Remove default background */
+  border: none; /* Remove default border */
+  z-index: 1; /* Ensure arrows are on top of the slider */
+}
+
+.slidertwovideo .slick-prev:before,
+.slidertwovideo .slick-next:before {
+  display: none; /* Hide default arrow icon */
+}
+
+.slidertwovideo .slick-prev {
+  left: 3px;
+  z-index: 1; 
+  background: rgb(252, 253, 252); 
+  top: 50%;
+}
+
+.slidertwovideo .slick-next {
+
+  top: 50%;
+
+  z-index: 1;
+  right: -17px;
+  
+  background: green; 
+  
+}
+
+.slidertwovideo .slick-dots{
+  display: none !important;
+}
+
+
+
+
+.bgone{
+
+  background-image: url("https://bachatmart.pk/public/mini-banners/mini-banners1719232812.png");
+
+  background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+}
+
+.bgtwo{
+  background-image: url("https://bachatmart.pk/public/mini-banners/mini-banners1719232802.png");
+  background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+
+}
+
+.bgthree{
+  background-image: url("https://bachatmart.pk/public/mini-banners/mini-banners1719232821.png");
+  background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+
+}
+
+
+ .containercard:hover .newbadge{
+display: none;
+}
+
+.containercardvideo:hover .newbadgevideo{
+  display: none;
+  }
+
+
+
+.productcard:hover .newbadge{
+  display: none;
+  }
+
+  .productcard:hover .newbadgevideo{
+    display: none;
+    }
+  
+.cardanima {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0; /* Equivalent to py-3 */
+  position: absolute;
+  bottom: 3.2rem; /* Equivalent to bottom-12 */
+  align-items: center;
+  /* left: 12px; */
+  background-color: white;
+  width: 100%;
+    opacity: 0;
+  transform: translateY(100%);
+  transition: transform .5s ease-in-out, opacity 1.1s ease-in-out;
+  visibility: hidden;
+}
+
+.cardanimaproduct{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0; /* Equivalent to py-3 */
+  position: absolute;
+  bottom: 2.9rem; /* Equivalent to bottom-12 */
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform .5s ease-in-out, opacity 1.1s ease-in-out;
+  visibility: hidden;
+}
+
+.containercard:hover .cardanima {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.containercardvideo:hover .cardanima {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+
+.productcard:hover .cardanimaproduct {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.cartimg:hover .lock{
+display: inline-block;
+}
+
+
+.required-field::after {
+  content: " *";
+  color: red;
+}
+
+.allproducts.ant-modal {
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+.allproducts .ant-modal-footer{
+  display: none !important;
+}
+
+
+
+@media(min-width:990px){
+  .slidertwo .slick-prev {
+    left: 2px;
+    z-index: 1; 
+    background: rgb(252, 253, 252); 
+    top: 50%;
+  }
+  
+  .slidertwo .slick-next {
+  
+    top: 47%;
+  right: 4px;
+    z-index: 1;
+    
+    background: green; 
+    
+  }
+
+  .slidermodals .slick-prev {
+    left: 0px;
+    z-index: 1; 
+    background: rgb(252, 253, 252); 
+    top: 50%;
+  }
+  
+  .slidermodals .slick-next {
+  
+    top: 50%;
+  right: 0px;
+    z-index: 1;
+    
+    background: green; 
+    
+  }
+  .cardanima{
+    bottom: 2.9rem;
+  }
+  .cardanimaproduct{
+    bottom: 2.9rem;
+  }
+
+  .slidertwovideo .slick-prev {
+    left: 0px;
+    z-index: 1; 
+    background: rgb(252, 253, 252); 
+    top: 50%;
+  }
+  
+  .slidertwovideo .slick-next {
+  
+    top: 48%;
+  right: 31px;
+    z-index: 1;
+    
+    background: green; 
+    
+  }
+
+}
