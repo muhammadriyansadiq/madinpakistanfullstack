@@ -1,8 +1,15 @@
 import express, { urlencoded } from "express"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 
 
 const app = express()
+
+app.use(cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URL,
+    optionsSuccessStatus: 200
+  }));
 
 app.use(express())
 app.use(express.json())
