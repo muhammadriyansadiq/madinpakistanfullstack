@@ -9,7 +9,7 @@ const Cart = () => {
   return (
     <div>
       <Navbar />
-      <div className=" w-full flex justify-center bg-zinc-300 py-5">
+      <div className=" w-full flex justify-center bg-zinc-400 py-5">
         <div className=" w-11/12">
           <button>Home</button>
           <button className=" ml-8">Cart</button>
