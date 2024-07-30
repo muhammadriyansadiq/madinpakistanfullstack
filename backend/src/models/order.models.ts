@@ -1,22 +1,26 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 
-export interface IOrder extends Document{
-   
-    orderNumber : string,
-    name: string,
-    email: string,
-    quantity: number,
-    charge: number,
-    totalAmount: number,
-    status: string
+export interface IOrder extends Document {
+    orderNumber: string;
+    name: string;
+    email: string;
+    userId: Types.ObjectId; // Correct type for userId
+    quantity: number;
+    charge: number;
+    totalAmount: number;
+    status: string;
 }
 
-const orderSchema :  Schema<IOrder>   = new Schema({
-  
+const orderSchema: Schema<IOrder> = new Schema({
     orderNumber: {
         type: String,
         trim: true,
         required: true
+    },
+    userId: {
+        type: Schema.Types.ObjectId, 
+        required: true, 
+        ref: 'User' 
     },
     name: {
         type: String,
@@ -43,12 +47,11 @@ const orderSchema :  Schema<IOrder>   = new Schema({
         trim: true,
         required: true
     },
-    status:{
+    status: {
         type: String,
         trim: true,
         required: true
-    }  
-    
-})
+    }
+});
 
-export const Order = mongoose.model<IOrder>("order", orderSchema)
+export const Order = mongoose.model<IOrder>("Order", orderSchema);
