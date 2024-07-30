@@ -10,15 +10,16 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { setcollapsed } from "../../redux/Counterslice";
 import Copyright from "./Copyright";
+import { useGetBannersQuery } from "../../redux/Api";
 const AdminBanner = () => {
-  // import {}
+  const { data: items, error: itemsError, isLoading: itemsLoading, refetch: refetchItems } = useGetBannersQuery();
+
   console.log("inner width", window.outerWidth);
+  console.log("items",items,"error",itemsError)
 const dispatched = useDispatch()
   const collapsed = useSelector((state) => state.counter.collapsed);
   const see = useSelector((state) => state.counter.see);
   const width = useSelector((state) => state.counter.width);
-
-
   const data = [
     // Add your data here
     { col1: '0', col2: 'New product', col3: 'New arrival alert', col4: '1 month ago', col5: 'Active',col6:"opop",col7:"ok" },
