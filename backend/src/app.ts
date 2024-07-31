@@ -19,6 +19,7 @@ app.use(cookieParser())
 
 import banner from "./routes/banner.routes"
 import { errorHandler } from "./middleware/errorHandler.middleware"
+
 import category from "./routes/category.routes"
 import brand from "./routes/brand.routes"
 import shipping from "./routes/shipping.routes"
@@ -30,6 +31,7 @@ import post from "./routes/post.routes"
 import product from "./routes/product.route"
 import user from "./routes/user.routes"
 import review from "./routes/review.routes"
+import addCategory from "./routes/addCategory.routes"
 
 app.use("/api", banner )
 app.use("/api", category )
@@ -43,7 +45,8 @@ app.use("/api", post )
 app.use("/api", product )
 app.use("/api", user )
 app.use("/api", review )
-
+app.use("/api", addCategory )
+ 
 //this is error handling middleware
 
 app.use(errorHandler)
