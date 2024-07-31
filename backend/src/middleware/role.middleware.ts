@@ -1,7 +1,7 @@
 import { Response, NextFunction } from "express";
 import { User } from "../models/user.models";
 import { ApiError } from "../utils/ApiError";
-import { CustomRequest } from "../utils/customRequest";  // Adjust the import path as needed
+import { CustomRequest } from "../utils/customRequest";  
 
 export const verifyRole = (roles: string[]) => {
     return async (req: CustomRequest, res: Response, next: NextFunction) => {

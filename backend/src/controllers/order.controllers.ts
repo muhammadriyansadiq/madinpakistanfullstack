@@ -3,11 +3,15 @@ import { asyncHandler } from "../utils/asyncHandler";
 import { Order } from "../models/order.models";
 import { ApiResponse } from "../utils/ApiResponse";
 import { ApiError } from "../utils/ApiError";
+import { Types } from "mongoose";
+import jwt from "jsonwebtoken"
+import { User } from "../models/user.models";
 
 interface OrderRequestBody {
     orderNumber: string;
     name: string;
     email: string;
+    userId: Types.ObjectId
     quantity: number;
     charge: number;
     totalAmount: number;
@@ -20,7 +24,7 @@ interface CustomRequest extends Request {
 
 const orderController = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
-        const { orderNumber, name, email, quantity, charge, totalAmount, status } = req.body;
+        const { orderNumber, name, email, userId, quantity, charge, totalAmount, status } = req.body;
 
         let randomSerial: string = 'abcdefgijklmnopqrstuvwxyz';
         let generateSerial: string = '';
@@ -28,13 +32,18 @@ const orderController = asyncHandler(async (req: CustomRequest, res: Response, n
             generateSerial += randomSerial.charAt(Math.floor(Math.random() * randomSerial.length));
         }
 
+        const token = req.cookies.accessToken
+        const decoded: any = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string);
+        const user = await User.findById(decoded._id).select('-password -refreshToken');
+        
         
         const finalOrderNumber = `ORD-${generateSerial}`.toUpperCase();
 
         const payload = await Order.create({
             orderNumber: finalOrderNumber,
-            name,
-            email,
+            name : user?.name ,
+            email : user?.email ,
+            userId: user?._id,
             quantity,
             charge,
             totalAmount,
@@ -57,6 +66,14 @@ const getOrderController = asyncHandler(async(req: CustomRequest, res: Response,
     } catch (error) {
         next(error)
     }
+})
+
+const getOrderByUser = asyncHandler(async(req: CustomRequest, res: Response, next: NextFunction)=>{
+    
+    const {userId} = req.params
+    console.log(req.params)
+    const payload = await Order.find({userId : userId})
+    return res.status(200).json(new ApiResponse(200, payload, "User's order retrieved successfully"))
 })
 
 const updateOrderController = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
@@ -83,5 +100,5 @@ const deleteOrderController = asyncHandler(async(req: CustomRequest, res: Respon
     }
 })
 
-export { orderController, getOrderController, updateOrderController, deleteOrderController };
+export { orderController, getOrderController, updateOrderController, deleteOrderController, getOrderByUser };
 

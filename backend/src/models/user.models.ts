@@ -123,8 +123,8 @@ userSchema.methods.changePassword = async function (currentPassword: string, new
         throw new ApiError(400, "Current password is incorrect");
     }
 
-    userWithPassword.password = newPassword; // Set new password directly
-    await userWithPassword.save(); // Save user document to hash and store the new password
+    userWithPassword.password = newPassword; 
+    await userWithPassword.save();
 };
 
 
