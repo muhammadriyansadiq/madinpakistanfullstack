@@ -65,13 +65,12 @@ function App() {
   <Route path="/contact" element={<Contactus/>} />
   <Route path="/admin/banner" element={<AdminBanner />} />
   <Route path="/admin/banner/create" element={<Adminbannercreate/>} />
-  <Route path='/admin/banner/id/edit' element={< Adminbanneridedit/>} />
+  <Route path='/admin/banner/:id' element={< Adminbanneridedit/>} />
   <Route path='/admin/category' element={< AdminCategory/>} />
   <Route path='/admin/product' element={< Adminproduct/>} />
   <Route path='/admin/brand' element={< Adminbrand/>} />
   <Route path='/admin/brand/create' element={< Adminbrandcreate/>} />
   <Route path='/admin/brand/id/edit' element={< Adminbrandedit/>} />
-
   <Route path='/admin/category/create' element={< Admincategorycreate/>} />
   <Route path='/admin/category/id/edit' element={< Admincategoryidedit/>} />
   <Route path='/admin/product/create' element={< Adminproductcreate/>} />

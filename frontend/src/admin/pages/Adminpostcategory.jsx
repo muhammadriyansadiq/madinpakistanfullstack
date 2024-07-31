@@ -159,15 +159,10 @@ const handlePreviousPage = () => {
                        No Post Found!! Please Create Post
                     </div>
 
-                    
-
-
 
                 </div>
             </div>
             </>
-      
-
         }
         <Copyright />
       </div>

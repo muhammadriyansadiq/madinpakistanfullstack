@@ -13,9 +13,8 @@ export const counterSlice = createSlice({
     hambergexpander:false,
     wishlistopen:false,
     viewcart:false,
-    tab1:false
-
-    
+    tab1:false,
+    bannerdata:[]
   },
   reducers: {
   
@@ -49,10 +48,13 @@ export const counterSlice = createSlice({
           },  
       settab1:  (state, action) => {
             state.tab1 = action.payload;
-            },     
+            },  
+            setbannerdata:  (state, action) => {
+              state.banner = action.payload;
+              },           
   },
 });
 
-export const {settab1, setviewcart,setwishlistopen, setcollapsed, setwidth,setsee,sethamberg,setwindowwidth,sethambergexpander } = counterSlice.actions;
+export const {settab1, setviewcart,setwishlistopen, setcollapsed, setwidth,setsee,sethamberg,setwindowwidth,sethambergexpander,setbannerdata } = counterSlice.actions;
 
 export default counterSlice.reducer;
