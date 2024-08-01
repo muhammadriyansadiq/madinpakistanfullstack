@@ -2,23 +2,62 @@ import React, { useState } from 'react';
 // import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import "../../App.css";
-import { FaPlus } from "react-icons/fa6";
-import { GoEye } from "react-icons/go";
-import { IoIosPrint } from "react-icons/io";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { PiGreaterThanBold } from "react-icons/pi";
+
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import Admindasjboardcomponents from "../components/Admindasjboardcomponents";
 import AdminNavbar from "../components/AdminNavbar";
-
+import axios from "axios"
+import { Spin } from "antd";
+import { useParams } from "react-router-dom";
+axios.defaults.withCredentials = true;
 const Adminposttagidedit = () => {
-
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    status: 'Active',
+  });
 
   const collapsed = useSelector((state) => state.counter.collapsed);
   const see = useSelector((state) => state.counter.see);
   const width = useSelector((state) => state.counter.width);
 
+  const fetchBanner = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_KEY}/api/tag`);
+      const bannerData = response.data.data.find((data) => data._id === id);
+      if (bannerData) {
+        setFormData({
+          title: bannerData.title,
+          status: bannerData.status,
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching banner data:', error);
+    }
+  };
 
+  useEffect(() => {
+    fetchBanner();
+  }, []);
+
+  console.log("formdata",formData)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.put(`${import.meta.env.VITE_API_KEY}/api/tag/${id}`, formData);
+      console.log('Banner updated successfully:', response);
+      // Handle success, e.g., notify user or navigate away
+      await fetchBanner();
+    } catch (error) {
+      console.error('Error updating banner:', error);
+      // Handle error, e.g., notify user
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="flex w-full ">
       {see ? (
@@ -49,11 +88,16 @@ const Adminposttagidedit = () => {
                         <div className='font-sans font-medium text-gray-700 text-[21px]'>Add Post Tag</div>
                        
                     </div>
-<form action="">
+<form action=""  onSubmit={handleSubmit}>
                     <div className='p-5 w-full'>
                         <div className=''>
-                            <label for="title"  className=' text-[15px]'>Type </label>
-                            <input   id="title" type='search' className=' mt-2  leading-10 border-[1px] border-gray-500 rounded-md px-1   w-full' placeholder=' Enter Name' />
+                            <label 
+                            
+                            for="title"  className=' text-[15px]'>Type </label>
+                            <input
+                                                  value={formData.title}
+                                                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                            id="title" type='search' className=' mt-2  leading-10 border-[1px] border-gray-500 rounded-md px-1   w-full' placeholder=' Enter Name' />
                         </div>
                     </div>
 
@@ -67,7 +111,10 @@ const Adminposttagidedit = () => {
                     <div className='px-5 pb-5 w-full '>
                         <div>
                             <label for="select"  className=' text-[15px]'>Status</label >
-                            <select name="cars" id="select"  className='px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full'>
+                            <select
+                                                  value={formData.status}
+                                                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                            name="cars" id="select"  className='px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full'>
   
                             <option value="volvo">Active</option>
                             <option value="saab">InActive</option>
@@ -81,9 +128,10 @@ const Adminposttagidedit = () => {
 
                     <div className='p-5  w-full '>
                         <div className=''>
-                            <button className=' bg-green-500 py-2 border-[2px] font-semibold border-green-700 hover:bg-white hover:text-green-700 px-5 text-white rounded-md '>Reset</button>
 
-                            <button className=' ml-4 bg-green-700 py-2 border-[2px] font-semibold border-green-700 hover:bg-white hover:text-green-700 px-5 text-white rounded-md '>Submit</button>
+                            <button type='submit' className=' bg-green-700 py-2 border-[2px] font-semibold border-green-700 hover:bg-white hover:text-green-700 px-5 text-white rounded-md '>
+                              {loading?"loading...":"update"}
+                              </button>
                         </div>
                     </div>
                     </form>

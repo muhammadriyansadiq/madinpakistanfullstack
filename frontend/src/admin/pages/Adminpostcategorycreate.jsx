@@ -13,7 +13,11 @@ import AdminNavbar from "../components/AdminNavbar";
 import Copyright from './Copyright';
 
 const Adminpostcategorycreate = () => {
-  
+  const [formData, setFormData] = useState({
+    type: '',
+    status: 'Active',
+  });
+
 
 
 
