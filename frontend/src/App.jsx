@@ -92,9 +92,9 @@ function App() {
 
   <Route path='/admin/post/category/create' element={< Adminpostcategorycreate/>} />
   <Route path='/admin/posttag' element={< Adminposttag/>} />
-  <Route path='/admin/posttag/id/edit' element={< Adminposttagidedit/>} />
+  <Route path='/admin/tag/:id' element={< Adminposttagidedit/>} />
 
-  <Route path='/admin/posttag/create' element={< Adminposttagcreate/>} />
+  <Route path='/admin/tag/create' element={< Adminposttagcreate/>} />
   <Route path='/admin/postcomment' element={< Admincomment/>} />
   <Route path='/admin/coupon' element={< Admincoupon/>} />
   <Route path='/admin/coupon/create' element={< Admincouponcreate/>} />

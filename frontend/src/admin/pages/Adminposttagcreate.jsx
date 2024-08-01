@@ -2,25 +2,40 @@ import React, { useState } from 'react';
 // import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import "../../App.css";
-import { FaPlus } from "react-icons/fa6";
-import { GoEye } from "react-icons/go";
-import { IoIosPrint } from "react-icons/io";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { PiGreaterThanBold } from "react-icons/pi";
+
 import { useSelector } from 'react-redux';
 import Admindasjboardcomponents from "../components/Admindasjboardcomponents";
 import AdminNavbar from "../components/AdminNavbar";
-
+import axios from "axios";
+import { Spin } from 'antd';
+axios.defaults.withCredentials = true;
 const Adminposttagcreate = () => {
-  
-
-
-
   const collapsed = useSelector((state) => state.counter.collapsed);
   const see = useSelector((state) => state.counter.see);
   const width = useSelector((state) => state.counter.width);
+  const [loading,setLoading] = useState(false)
+  const [formData, setFormData] = useState({
+    title: '',
+    status: 'Active',
+  });
 
 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/tag`, formData);
+      console.log('Brand created successfully:', response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error creating brand:', error);
+      console.error('Error response:', error.response);
+      setLoading(false);
+    }
+    
+  };
   return (
     <div className="flex w-full ">
       {see ? (
@@ -51,11 +66,14 @@ const Adminposttagcreate = () => {
                         <div className='font-sans font-medium text-gray-700 text-[21px]'>Add Post Tag</div>
                        
                     </div>
-<form action="">
+<form action="" onSubmit={handleSubmit}>
                     <div className='p-5 w-full'>
                         <div className=''>
                             <label for="title"  className=' text-[15px]'>Type </label>
-                            <input   id="title" type='search' className=' mt-2  leading-10 border-[1px] border-gray-500 rounded-md px-1   w-full' placeholder=' Enter Name' />
+                            <input  
+                              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+
+                            id="title" type='search' className=' mt-2  leading-10 border-[1px] border-gray-500 rounded-md px-1   w-full' placeholder=' Enter Name' />
                         </div>
                     </div>
 
@@ -69,10 +87,13 @@ const Adminposttagcreate = () => {
                     <div className='px-5 pb-5 w-full '>
                         <div>
                             <label for="select"  className=' text-[15px]'>Status</label >
-                            <select name="cars" id="select"  className='px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full'>
+                            <select
+                              onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+
+                            name="cars" id="select"  className='px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full'>
   
-                            <option value="volvo">Active</option>
-                            <option value="saab">InActive</option>
+                            <option value="active">Active</option>
+                            <option value="Inactive">InActive</option>
 
 </select>
                         </div>
@@ -83,9 +104,15 @@ const Adminposttagcreate = () => {
 
                     <div className='p-5  w-full '>
                         <div className=''>
-                            <button className=' bg-green-500 py-2 border-[2px] font-semibold border-green-700 hover:bg-white hover:text-green-700 px-5 text-white rounded-md '>Reset</button>
+                        <button type="button" onClick={() => setFormData({ title: '', status: 'Active' })}
+                      className='bg-white py-2 border-[2px] font-semibold border-green-700 hover:bg-green-700 hover:text-white px-5 text-green-700 rounded-md'>
+                      Reset
+                    </button>
+                    <button type='submit'
+                      className='ml-4 bg-green-700 py-2 border-[2px] font-semibold border-green-700 hover:bg-white hover:text-green-700 px-5 text-white rounded-md'>
+                      {loading ?"Loading..." : "Submit"}
+                    </button>
 
-                            <button className=' ml-4 bg-green-700 py-2 border-[2px] font-semibold border-green-700 hover:bg-white hover:text-green-700 px-5 text-white rounded-md '>Submit</button>
                         </div>
                     </div>
                     </form>

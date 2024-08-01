@@ -183,8 +183,7 @@ const handleDeleteItem = async (id) => {
 </div>  
 
                 </div>
-            </div> :
-            
+            </div> :     
             <>
            <div className='w-full flex justify-center mt-9 allorders'>
                 <div className='w-full border-[2px] rounded-md mb-3'>

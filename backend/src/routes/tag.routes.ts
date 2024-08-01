@@ -7,4 +7,4 @@ router.route('/tag').get(getTagController)
 router.route('/tag/:id').put(updateTagController)
 router.route('/tag/:id').delete(deleteTagController)
 
-export default router
+export default router   
