@@ -13,6 +13,10 @@ import axios from "axios"
 import { Spin } from "antd";
 import { useParams } from "react-router-dom";
 axios.defaults.withCredentials = true;
+
+
+
+
 const Adminshipping = () => {
   
   console.log("inner width", window.outerWidth);
@@ -39,6 +43,7 @@ const Adminshipping = () => {
 
 const [currentPage, setCurrentPage] = useState(1);
 const [shippingdata,setshippingdata] =useState([])
+const [loading, setloading] = useState(false);
 const itemsPerPage = 5;
 
 // Calculate the total number of pages
@@ -74,6 +79,22 @@ useEffect(()=>{
   name()
 
 },[])
+
+
+const handleDeleteItem = async (id) => {
+  try {
+    setloading(true);
+    const response = await axios.delete(`${import.meta.env.VITE_API_KEY}/api/shipping/${id}`);
+    console.log("Deleted successfully:", response.data);
+    // Refresh the data
+    await name();
+  } catch (err) {
+    console.error("Error deleting item:", err);
+    // Optionally, set an error message to notify the user
+  } finally {
+    setloading(false);
+  }
+};
 
   return (
     <div className="flex w-full ">
@@ -139,7 +160,13 @@ useEffect(()=>{
                                                     <div className='flex justify-around'>
 
                                                     <Link to={`/admin/shipping/${row._id}`} className="bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
-                                                        <button className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white"><MdDeleteForever /></button>
+                                                        <button 
+                                                        onClick={() => handleDeleteItem(row._id)}
+                                                        className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white">
+                                                          {loading?<Spin />:
+                                                          <MdDeleteForever />
+                                                          }
+                                                          </button>
                                                         </div>
                                                 </td>
                                             </tr>
