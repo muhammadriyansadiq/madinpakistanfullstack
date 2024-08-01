@@ -1,10 +1,11 @@
-import { reviewController, deleteReviewController, getReviewController, updateReviewController } from "../controllers/review.controllers"
+import { reviewController, deleteReviewController, getReviewController, updateReviewController, getReviewByUser } from "../controllers/review.controllers"
 import express from "express"
 const router = express.Router()
 
-router.route('/Review').post(reviewController)
-router.route('/Review').get(getReviewController)
-router.route('/Review/:id').put(updateReviewController)
-router.route('/Review/:id').delete(deleteReviewController)
+router.route('/review').post(reviewController)
+router.route('/review').get(getReviewController)
+router.route('/review/:id').get(getReviewByUser)
+router.route('/review/:id').put(updateReviewController)
+router.route('/review/:id').delete(deleteReviewController)
 
 export default router
