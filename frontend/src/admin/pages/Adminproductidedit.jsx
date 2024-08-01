@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 // import Navbar from './Navbar';
-import { Link } from "react-router-dom";
 import "../../App.css";
-import { FaPlus } from "react-icons/fa6";
-import { GoEye } from "react-icons/go";
-import { IoIosPrint } from "react-icons/io";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { PiGreaterThanBold } from "react-icons/pi";
+
 import { useSelector } from "react-redux";
 import Admindasjboardcomponents from "../components/Admindasjboardcomponents";
 import AdminNavbar from "../components/AdminNavbar";
@@ -17,11 +12,11 @@ const Adminproductidedit = () => {
   const width = useSelector((state) => state.counter.width);
 
   return (
+
     <div className="flex w-full ">
       {see ? (
         <Admindasjboardcomponents
           collapsed={collapsed}
-          // toggleCollapsed={toggleCollapsed}
         />
       ) : (
         ""

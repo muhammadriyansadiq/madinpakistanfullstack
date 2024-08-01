@@ -9,7 +9,6 @@ export interface ISetting extends Document {
     email: string;
     number: number
 }
-
 const settingSchema: Schema<ISetting> = new Schema({
     footerText:{
         type: String,
