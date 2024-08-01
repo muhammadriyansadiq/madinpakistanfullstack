@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import Copyright from "./Copyright";
-
+import axios from "axios"
+import { Spin } from "antd";
+import { useParams } from "react-router-dom";
+axios.defaults.withCredentials = true;
 const Adminshipping = () => {
   
   console.log("inner width", window.outerWidth);
@@ -35,6 +38,7 @@ const Adminshipping = () => {
   ];
 
 const [currentPage, setCurrentPage] = useState(1);
+const [shippingdata,setshippingdata] =useState([])
 const itemsPerPage = 5;
 
 // Calculate the total number of pages
@@ -50,6 +54,27 @@ const handleNextPage = () => {
 const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
 };
+
+async function name(){
+  try{
+    const getcategorydata = await axios.get(`${import.meta.env.VITE_API_KEY}/api/shipping`);
+
+  console.log("databrand",getcategorydata.data.data)
+  setshippingdata(getcategorydata.data.data)
+  }
+  catch(err){
+
+    console.log("error",err)
+
+  }
+}
+
+useEffect(()=>{
+
+  name()
+
+},[])
+
   return (
     <div className="flex w-full ">
       {see ? (
@@ -104,17 +129,17 @@ const handlePreviousPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {currentItems.map((row, index) => (
+                                        {shippingdata.map((row, index) => (
                                             <tr key={index} className="border border-gray-300">
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col1}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col2}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col3}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col4}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{index +1}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.type}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.price}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.status}</td>
                                                 <td className=" py-2 border border-gray-300 text-center">
                                                     <div className='flex justify-around'>
-                                                    <Link to={'/admin/shipping/id/edit'} className="bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
 
-                                                        <Link to={'/orders/id'} className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white"><MdDeleteForever /></Link>
+                                                    <Link to={`/admin/shipping/${row._id}`} className="bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
+                                                        <button className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white"><MdDeleteForever /></button>
                                                         </div>
                                                 </td>
                                             </tr>
