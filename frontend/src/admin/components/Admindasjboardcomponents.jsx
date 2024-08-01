@@ -53,7 +53,7 @@ const Admindasjboardcomponents = ({ collapsed, toggleCollapsed }) => {
       children: [
         {
           key: "/category",
-          label: <Link to="/admin/category">Category</Link>,
+          label: <Link to="/category">Category</Link>,
         },
         {
           key: "/addcategory",

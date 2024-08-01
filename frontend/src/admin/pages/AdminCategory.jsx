@@ -9,20 +9,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import Copyright from "./Copyright";
-
+import axios from "axios"
+axios.defaults.withCredentials = true;
+import { Spin } from "antd";
 const AdminCategory = () => {
   
   console.log("inner width", window.outerWidth);
-
-
 
   const collapsed = useSelector((state) => state.counter.collapsed);
   const see = useSelector((state) => state.counter.see);
   const width = useSelector((state) => state.counter.width);
 
   // piechart
-
-
 
   const data = [
     // Add your data here
@@ -33,8 +31,9 @@ const AdminCategory = () => {
     { col1: '1', col2: 'Bike', col3: 'Super bike', col4: 'No', col5: 'Automobie',col6:"opop",col7:"ok",col8:"https://cdn.pixabay.com/photo/2024/05/02/16/22/parrots-8735074_640.jpg" },
     { col1: '1', col2: 'Bike', col3: 'Super bike', col4: 'No', col5: 'Automobie',col6:"opop",col7:"ok",col8:"https://cdn.pixabay.com/photo/2024/05/02/16/22/parrots-8735074_640.jpg" }, 
   ];
-
+const [getcategorystate,setgetcategorystate] =useState([])
 const [currentPage, setCurrentPage] = useState(1);
+const [loading,setloading] = useState(false)
 const itemsPerPage = 5;
 
 // Calculate the total number of pages
@@ -50,6 +49,47 @@ const handleNextPage = () => {
 const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
 };
+
+
+async function name(){
+    try{
+      const getcategorydata = await axios.get(`${import.meta.env.VITE_API_KEY}/api/category`);
+   
+        setgetcategorystate(getcategorydata.data.data)
+
+    console.log("data",getcategorydata.data.data)
+
+    }
+    catch(err){
+
+      console.log("error",err)
+
+    }
+  }
+
+  useEffect(  ()=>{
+    name()
+  },[])
+
+
+  const handleDeleteItem = async (id) => {
+    try{
+      setloading(true)
+      const getbannerata = await axios.delete(`${import.meta.env.VITE_API_KEY}/api/category/${id}`);
+      console.log("deleted successfully",getbannerata)
+      name()
+      setTimeout(() => {
+        
+        setloading(false)
+      }, 1000);
+    }
+    catch(err){
+  console.log("err",err)
+    }
+  };
+
+
+
   return (
     <div className="flex w-full ">
       {see ? (
@@ -70,7 +110,7 @@ const handlePreviousPage = () => {
         <div className='w-full flex justify-center mt-9 allorders'>
                 <div className='w-full border-[2px] rounded-md mb-3'>
                     <div className='flex justify-between p-5 border-b-[1px]'>
-                        <div className='font-sans font-medium text-gray-700 text-[18px]'>Banner List</div>
+                        <div className='font-sans font-medium text-gray-700 text-[18px]'>Category List</div>
                         <Link to={'/admin/category/create'}>
                             <div className='cursor-pointer'>
                                 <button className='bg-green-700 border-[1px] text-white p-2 rounded-md hover:bg-white hover:text-green-700 hover:border-green-700'>
@@ -105,26 +145,30 @@ const handlePreviousPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {currentItems.map((row, index) => (
+                                        {getcategorystate.map((row, index) => (
                                             <tr key={index} className="border border-gray-300">
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col1}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col2}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col3}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col4}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col5}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{index+1}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.title}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.summary}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{`${row.isParent}`}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.parentCategory}</td>
 
                                                 <td className="px-4 py-2 border border-gray-300 text-center">
                                                     <div >
-                                                        <img src={row.col8} alt="logo" className=" object-cover h-[50px] w-full" />
+                                                        <img src={row.categoryImage} alt="logo" className=" object-cover h-[50px] w-full" />
                                                     </div>
                                                 </td>
 
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col5}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.status}</td>
                                                 <td className=" py-2 border border-gray-300 text-center">
                                                     <div className='flex justify-around'>
-                                                    <Link to={'/admin/category/id/edit'} className="bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
+                                                    <Link to={`/admin/category/${row._id}`} className="bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
 
-                                                        <Link to={'/orders/id'} className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white"><MdDeleteForever /></Link>
+                                                        <button  className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white" onClick={() => handleDeleteItem(row._id)} >
+                                                          {loading?<Spin />:
+                                                          <MdDeleteForever />
+                                                        }
+                                                          </button>
                                                         </div>
                                                 </td>
                                             </tr>

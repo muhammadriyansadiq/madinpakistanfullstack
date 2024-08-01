@@ -66,18 +66,18 @@ function App() {
   <Route path="/admin/banner" element={<AdminBanner />} />
   <Route path="/admin/banner/create" element={<Adminbannercreate/>} />
   <Route path='/admin/banner/:id' element={< Adminbanneridedit/>} />
-  <Route path='/admin/category' element={< AdminCategory/>} />
+  <Route path='/category' element={< AdminCategory/>} />
   <Route path='/admin/product' element={< Adminproduct/>} />
   <Route path='/admin/brand' element={< Adminbrand/>} />
   <Route path='/admin/brand/create' element={< Adminbrandcreate/>} />
-  <Route path='/admin/brand/id/edit' element={< Adminbrandedit/>} />
+  <Route path='/admin/brand/:id' element={< Adminbrandedit/>} />
   <Route path='/admin/category/create' element={< Admincategorycreate/>} />
-  <Route path='/admin/category/id/edit' element={< Admincategoryidedit/>} />
+  <Route path='/admin/category/:id' element={< Admincategoryidedit/>} />
   <Route path='/admin/product/create' element={< Adminproductcreate/>} />
   <Route path='/admin/product/id/edit' element={< Adminproductidedit/>} />
   <Route path='/admin/shipping' element={< Adminshipping/>} />
   <Route path='/admin/shipping/create' element={< Adminshippingcreate/>} />
-  <Route path='/admin/shipping/id/edit' element={< Adminshippingidedit/>} />
+  <Route path='/admin/shipping/:id' element={< Adminshippingidedit/>} />
   <Route path='/admin/order' element={< Adminorder/>} />
   <Route path='/admin/order/id' element={< Adminorderid/>} />
   <Route path='/admin/order/id/edit' element={< Adminorderidedit/>} />
