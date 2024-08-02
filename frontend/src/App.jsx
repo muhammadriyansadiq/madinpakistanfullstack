@@ -53,14 +53,20 @@ import Productscategorydetails from './public/pages/Productscategorydetails';
 import Sellerregister from './public/pages/Sellerregister';
 import Sellerlogin from './public/pages/Sellerlogin';
 import Trackrecord from './public/pages/Trackrecord';
+
+// import { AuthProvider } from './utils/AuthProvider';
+// import PrivateRoute from './utils/PrivateRoute';
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    {/* <AuthProvider> */}
   <BrowserRouter>
   <Routes>
   <Route path="/" element={< Home/>} />
+  {/* <PrivateRoute path='/homedashboard' roles={['admin']} component={< Adminhome/>} /> */}
   <Route path='/homedashboard' element={< Adminhome/>} />
   <Route path="/contact" element={<Contactus/>} />
   <Route path="/admin/banner" element={<AdminBanner />} />
@@ -124,9 +130,38 @@ function App() {
 
   </Routes>
   </BrowserRouter>  
-
+  {/* </AuthProvider> */}
     </>
   )
 }
 
 export default App
+
+
+
+
+
+// import React from 'react';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { AuthProvider } from './AuthContext';
+// import PrivateRoute from './PrivateRoute';
+// import AdminDashboard from './AdminDashboard';
+// import UserDashboard from './UserDashboard';
+// import Login from './Login';
+
+// function App() {
+//   return (
+//     <AuthProvider>
+//       <Router>
+//         <Switch>
+//           <Route path="/login" component={Login} />
+//           <PrivateRoute path="/admin" roles={['admin']} component={AdminDashboard} />
+//           <PrivateRoute path="/user" roles={['user', 'admin']} component={UserDashboard} />
+//           <Route path="/" exact component={Home} />
+//         </Switch>
+//       </Router>
+//     </AuthProvider>
+//   );
+// }
+
+// export default App;
