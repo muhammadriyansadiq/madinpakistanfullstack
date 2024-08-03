@@ -16,6 +16,8 @@ const brandSchema : Schema<IBrand> = new Schema({
         trim: true,
         required: true
     },
+},{
+    timestamps: true
 })
 
 export const Brand = mongoose.model<IBrand>("brand", brandSchema)

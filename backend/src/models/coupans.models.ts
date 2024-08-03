@@ -28,6 +28,8 @@ const couppanSchema: Schema<ICoupans> = new Schema({
         required: true,
         trim: true
     },
+},{
+    timestamps: true
 })
 
 export const Coupan = mongoose.model<ICoupans>("coupan", couppanSchema)

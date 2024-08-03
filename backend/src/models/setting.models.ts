@@ -45,6 +45,8 @@ const settingSchema: Schema<ISetting> = new Schema({
         trim: true,
         required: true
     }
+},{
+    timestamps: true
 })
 
 export const Setting = mongoose.model<ISetting>("setting", settingSchema)

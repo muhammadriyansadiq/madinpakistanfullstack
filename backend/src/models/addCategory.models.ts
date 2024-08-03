@@ -16,6 +16,8 @@ const addCategorySchema : Schema<AddCategory> = new Schema({
         trim: true,
         required: true
     },
+},{
+    timestamps: true
 })
 
 export const AddCategory = mongoose.model<AddCategory>("addCategory", addCategorySchema)

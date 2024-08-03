@@ -58,6 +58,8 @@ const postSchema : Schema<IPost> = new Schema({
         trim: true,
         required: true
     },
+},{
+    timestamps: true
 })
 
 export const Posts = mongoose.model<IPost>("post", postSchema)
