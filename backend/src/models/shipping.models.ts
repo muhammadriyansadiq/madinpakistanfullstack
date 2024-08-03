@@ -22,6 +22,8 @@ const shippingSchema : Schema<IShipping> = new Schema({
         trim: true,
         required: true
     },
+},{
+    timestamps: true
 })
 
 export const Shipping = mongoose.model<IShipping>("shipping", shippingSchema)

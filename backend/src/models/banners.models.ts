@@ -29,6 +29,8 @@ const bannerSchema: Schema<IBanner> = new Schema({
     trim: true,
     required: true
   }
+},{
+  timestamps: true
 });
 
 // Export the model with the correct type

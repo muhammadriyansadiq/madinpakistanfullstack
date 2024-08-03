@@ -87,6 +87,8 @@ const productSchema : Schema<IProduct> = new Schema({
         required: true,
         trim: true
     }
+},{
+    timestamps: true
 })
 
 export const Product = mongoose.model<IProduct>("product", productSchema)

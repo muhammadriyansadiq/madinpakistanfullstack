@@ -32,7 +32,11 @@ import product from "./routes/product.route"
 import user from "./routes/user.routes"
 import review from "./routes/review.routes"
 import addCategory from "./routes/addCategory.routes"
+import addToCart from "./routes/addToCart.routes"
+import addToWishList from "./routes/addToWishList.routes"
+import checkout from "./routes/checkout.routes"
 
+app.use("/api", addToCart)
 app.use("/api", banner )
 app.use("/api", category )
 app.use("/api", brand)
@@ -46,7 +50,8 @@ app.use("/api", product )
 app.use("/api", user )
 app.use("/api", review )
 app.use("/api", addCategory )
- 
+app.use('/api', addToWishList)
+app.use("/api", checkout )
 //this is error handling middleware
 
 app.use(errorHandler)
