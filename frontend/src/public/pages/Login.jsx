@@ -23,22 +23,24 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     console.log('Form submitted');
-
+  
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/login`, formData);
       console.log('Login successful:', response.data.data.user.role);
       let user = response.data.data.user;
+      let accessToken = response.data.data.accessToken;
+  
+      // Store token in local storage
+      localStorage.setItem('accessToken', accessToken);
+  
       setLoading(false);
       setAuthErr("");
-
       setUser(user);
-
-      if (user.role === "user") {
-        navigate('/');
-      } else {
-        alert("ok");
+      if(response.status === 200){
+        navigate('/')
       }
-
+     
+  
       setFormData({ email: '', password: '' });
     } catch (error) {
       console.error('Error during login:', error.response.data);
@@ -46,6 +48,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
 
   console.log("authErr", authErr);
 

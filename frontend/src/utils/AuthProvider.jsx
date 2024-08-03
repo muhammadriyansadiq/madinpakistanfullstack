@@ -1,6 +1,5 @@
-// AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import * as jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -12,8 +11,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('accessToken'); // Or use cookies
     if (token) {
-      const decoded = jwtDecode.default(token); // Use jwtDecode.default to access the function
-      setUser(decoded);
+      try {
+        const decoded = jwtDecode(token); // Use decode function
+        console.log('Decoded User:', decoded); // Debug: Check decoded token
+        setUser(decoded);
+      } catch (err) {
+        console.error('Token decoding failed:', err);
+      }
     }
   }, []);
 
