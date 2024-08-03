@@ -1,22 +1,19 @@
-// import React from 'react';
-// import { Route, useNavigate } from 'react-router-dom';
-// // import { useAuth } from './AuthContext';
-// import { useAuth } from './AuthProvider';
-// const PrivateRoute = ({ component: Component, roles, ...rest }) => {
-//   const { user } = useAuth();
-//   const naviagte = useNavigate()
-//   return (
-//     <Route
-//       {...rest}
-//       render={props =>
-//         user && roles.includes(user.role) ? (
-//           <Component {...props} />
-//         ) : (
-//           naviagte('/login')
-//         )
-//       }
-//     />
-//   );
-// };
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from './AuthProvider';
 
-// export default PrivateRoute;
+const PrivateRoute = ({ roles }) => {
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  if (roles && !roles.includes(user.role)) {
+    return <Navigate to="/" />;
+  }
+
+  return <Outlet />;
+};
+
+export default PrivateRoute;

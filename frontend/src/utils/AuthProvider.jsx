@@ -1,30 +1,25 @@
-// import React, { createContext, useContext, useState, useEffect } from 'react';
-// import axios from 'axios';
+// AuthContext.js
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as jwtDecode from 'jwt-decode';
 
-// const AuthContext = createContext();
+const AuthContext = createContext();
 
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
+export const useAuth = () => useContext(AuthContext);
 
-//   useEffect(() => {
-//     // Fetch the current user from the backend
-//     const fetchUser = async () => {
-//       try {
-//         const { data } = await axios.get('/api/current-user', { withCredentials: true });
-//         setUser(data.data);
-//       } catch (error) {
-//         console.error('Error fetching current user:', error);
-//       }
-//     };
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-//     fetchUser();
-//   }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken'); // Or use cookies
+    if (token) {
+      const decoded = jwtDecode.default(token); // Use jwtDecode.default to access the function
+      setUser(decoded);
+    }
+  }, []);
 
-//   return (
-//     <AuthContext.Provider value={{ user, setUser }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = () => useContext(AuthContext);
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
