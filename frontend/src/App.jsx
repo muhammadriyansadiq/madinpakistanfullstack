@@ -54,6 +54,9 @@ import Adminposttagidedit from "./admin/pages/Adminposttagidedit";
 
 import { AuthProvider } from "./utils/AuthProvider";
 import PrivateRoute from './utils/PrivateRoute';
+import Forgetpassword from "./public/pages/Forgetpassword";
+import ReserPasswordtoken from "./public/pages/ReserPasswordtoken";
+import ChangePAssword from "./public/pages/ChangePAssword";
 
 function App() {
   return (
@@ -66,14 +69,20 @@ function App() {
           <Route path="/product" element={<Products />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/changepassword" element={<ChangePAssword />} />
+
           <Route path="/products/:category" element={<ProductCategory />} />
           <Route path="/products/category/items" element={<Productscategorydetails />} />
           <Route path="/seller/register" element={<Sellerregister />} />
           <Route path="/seller/login" element={<Sellerlogin />} />
           <Route path="/trackrecord" element={<Trackrecord />} />
+          <Route path="/forgetpassword" element={<Forgetpassword />} />
+          <Route path="/reset-password/:token" element={<ReserPasswordtoken />} />
 
           <Route element={<PrivateRoute roles={['admin']} />}>
             <Route path="/homedashboard" element={<Adminhome />} />

@@ -25,17 +25,16 @@ const Login = () => {
     console.log('Form submitted');
   
     try {
+
       const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/login`, formData);
       console.log('Login successful:', response.data.data.user.role);
       let user = response.data.data.user;
       let accessToken = response.data.data.accessToken;
-  
       // Store token in local storage
       localStorage.setItem('accessToken', accessToken);
-  
       setLoading(false);
       setAuthErr("");
-      setUser(user);
+      setUser(user);//
       if(response.status === 200){
         navigate('/')
       }
@@ -89,7 +88,8 @@ const Login = () => {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
-                {authErr === "Invalid credentials" && <div className='text-red-400'>{authErr}</div>}
+                {authErr === "invalid user credential" && <div className='text-red-400'>{authErr}</div>}
+                <Link to={'/forgetpassword'} className=' text-blue-400 text-start mt-2'>Forget Password</Link>
               </div>
 
               {/* Submit Button */}

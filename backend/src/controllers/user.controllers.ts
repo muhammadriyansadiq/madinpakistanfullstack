@@ -277,7 +277,9 @@ const sendResetEmail = async (email: string, token: string) => {
     from: process.env.EMAIL_FROM,
     to: email,
     subject: "Password Reset Request",
-    text: `You requested a password reset. Please make a PUT request to the following URL to reset your password: ${resetURL}`,
+    // html: `<p>You requested a password reset. Please make a PUT request to the following URL to reset your password:<a href =" ${resetURL}">here<p>`,
+    html: `<p>Click <a href="${resetURL}">here</a> to reset your password</p>`
+
   };
 
   await transporter.sendMail(mailOptions);
