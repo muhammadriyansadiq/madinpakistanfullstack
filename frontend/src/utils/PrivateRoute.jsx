@@ -6,10 +6,10 @@ const PrivateRoute = ({ roles }) => {
   const { user } = useAuth();
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/homedashboard" />;
   }
 
-  if (roles && !roles.includes(user.role)) {
+  if (roles && !roles.includes(user.role)  ) {
     return <Navigate to="/" />;
   }
 
