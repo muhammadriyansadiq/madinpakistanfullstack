@@ -11,7 +11,9 @@ const router = Router();
 router.route("/register").post( upload.single("profilePhoto"), validate(validator),  userRegistration);
 router.route("/login").post(userLogin);
 router.route("/logout").post(verifyJWT, logoutUser);
+
 router.route("/current-user").get(verifyJWT, getCurrentUser);
+
 router.route("/delete-user/:id").delete(verifyJWT, deleteUser);
 router.route("/update-profile/:id").put( upload.single("profilePhoto"), verifyJWT,  updateUserProfile)
 
@@ -25,14 +27,17 @@ router.route("/user-route").get(verifyJWT, verifyRole(["user", "admin"]), (req, 
     res.status(200).json({ message: "User content" });
 });
 
+
 router.route('/request-password-reset').post(requestPasswordReset);
 router.route('/reset-password').post(resetPassword);
 router.route("/change-password").post(verifyJWT, changePassword);
 
 
 router.post("/request-change-email-otp", verifyJWT, requestChangeEmailOTP);
-router.post("/verify-otp-and-change-email", verifyJWT, verifyOTPAndChangeEmail);
+// otp genarate
 
+router.post("/verify-otp-and-change-email", verifyJWT, verifyOTPAndChangeEmail);
+// after otp written will verify and email changed 
 
 
 export default router;

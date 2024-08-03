@@ -89,6 +89,12 @@ useEffect(() => {
           <Link to={'/dashboard'}>Profile</Link>
         ),
       },
+      {
+        key: '3',
+        label: (
+          <Link to={'/changepassword'}>ChangePassword</Link>
+        ),
+      },   
   ];
 
 
