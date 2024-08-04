@@ -271,7 +271,7 @@ const navigate = useNavigate()
         className=" w-full  z-40 bg-green-600 mt-2 lg:mt-0"
       >
         <div className="w-full flex justify-center">
-          <div className="w-full lg:w-11/12">
+          <div className="w-full lg:w-11/12  flex justify-center">
             <div className="w-full py-2  lg:py-4 relative flex justify-between flex-wrap items-center lg:flex-nowrap lg:w-6/12">
               <Link to={"/"} className=" cursor-pointer text-[10px] lg:text-[16px] font-semibold border-b-[3px] border-white text-white p-1 lg:p-1 rounded-sm hover:text-green-600 hover:bg-white m-2 lg:m-0" >
                 Home

@@ -70,7 +70,7 @@ const Home = () => {
 
       <Reels />
 
-      <div className="text-center flex flex-col justify-center lg:mt-[330px] items-center">
+      <div className="text-center  flex flex-col justify-center lg:mt-[50px] items-center">
         <div className="font-bold text-[22px]">Trending Items</div>
         <div className="h-[2px] bg-green-700 w-[15%] lg:w-[6%]"></div>
       </div>
