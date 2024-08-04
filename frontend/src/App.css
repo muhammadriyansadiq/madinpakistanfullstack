@@ -88,14 +88,15 @@ color: white !important;
 }
 
 .sliderone .slick-prev {
-  left: 20px;
+  left: 10px;
   z-index: 1; 
+  top: 50%;
   background: rgb(252, 253, 252); 
   
 }
 
 .sliderone .slick-next {
-  right: 20px;
+  right: 5px;
   
   z-index: 1;
   
@@ -387,7 +388,7 @@ display: inline-block;
   }
 
   .slidertwovideo .slick-prev {
-    left: 0px;
+    left: 20px;
     z-index: 1; 
     background: rgb(252, 253, 252); 
     top: 50%;

@@ -237,7 +237,7 @@ const Navscrolldown = () => {
         }`}
       >
         <div className="w-full flex justify-center">
-          <div className="w-11/12">
+          <div className="w-11/12  flex justify-center">
             <div className="w-11/12 py-4 relative flex justify-between flex-wrap items-center lg:flex-nowrap lg:w-6/12 lg:py-2">
               <Link to={'/'} className=" cursor-pointer font-semibold border-b-[3px] border-green-600 text-green-600 p-1 lg:p-2  text-[10px] lg:text-[14px] rounded-sm hover:text-white hover:bg-green-600  lg:m-0" >
                 Home
