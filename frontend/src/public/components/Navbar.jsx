@@ -29,6 +29,7 @@ import Wishlist from "./Navbarsubcomponent/Wishlist";
 import Inputsearchhome from "./Inputsearchhome";
 import axios from "axios";
 import { useAuth } from "../../utils/AuthProvider";
+import { CgProfile } from "react-icons/cg";
 
 axios.defaults.withCredentials = true;
 const Navbar = () => {
@@ -39,10 +40,12 @@ const Navbar = () => {
   const wishlistopen = useSelector((state) => state.counter.wishlistopen);
   const viewcart = useSelector((state) => state.counter.viewcart);
   const [hovered, Sethovered] = useState("");
+  const [profileshow,setprofileshow] = useState(localStorage.getItem("accessToken"))
   //setwishlistopen
 
   const dispatch = useDispatch();
-
+  const { user } = useAuth();
+  console.log("current user",user)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -320,24 +323,9 @@ const Navbar = () => {
 
   console.log("wishlistopen", wishlistopen);
 
-  function wishlistopencartfunction() {
-    dispatch(setwishlistopen(!wishlistopen));
-    dispatch(setviewcart(false));
-  }
-
-  function wishlistclosecartfunction() {
-    dispatch(setwishlistopen(!wishlistopen));
-  }
-
-  function viewcartopenfunction() {
-    dispatch(setviewcart(!viewcart));
-    dispatch(setwishlistopen(false));
-  }
-  function viewcartclosefunction() {
-    dispatch(setviewcart(!viewcart));
-  }
 
   async function logoutfunction(e) {
+
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -345,10 +333,18 @@ const Navbar = () => {
       );
       console.log("Logout successful:", response);
       localStorage.removeItem("accessToken")
+      setprofileshow(localStorage.getItem("accessToken"))
+
     } catch (err) {
       console.log("error", err);
     }
   }
+
+  useEffect(()=>{
+    
+    setprofileshow(localStorage.getItem("accessToken"))
+
+  },[profileshow])
 
   return (
     <>
@@ -382,7 +378,7 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 w-[100%] sm:w-[85%] flex justify-between lg:w-[35%] lg:mt-0">
+                <div className="mt-4 w-[100%] sm:w-[85%] flex justify-between lg:w-[35%] lg:mt-0 py-2">
                   <div className="flex items-center cursor-pointer hover:text-green-700 text-[17px]">
                     <div className="text-green-600 text-[16px]">
                       <MdTrackChanges />
@@ -407,6 +403,7 @@ const Navbar = () => {
                     </Link>
                   </div>
                   <div className="border-2 mr-2 xl:mr-0"></div>
+                  {profileshow?
                   <div className="flex items-center cursor-pointer hover:text-green-700 text-[17px]">
                     <Space direction="vertical">
                       <Space wrap>
@@ -426,8 +423,11 @@ const Navbar = () => {
                         </Dropdown>
                       </Space>
                     </Space>
-                    {/* ======profileimg========== */}
+                  </div>:
+                  <div className=" flex items-center "><Link to={'/register'} className=" text-green-400 font-bold cursor-pointer">Register</Link> <Link to={'/login'} className=" text-green-400 font-bold cursor-pointer mx-2">Login</Link>
+                  <CgProfile className=" text-[23px]"/>
                   </div>
+                  }
                 </div>
               </div>
             </div>
