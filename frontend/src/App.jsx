@@ -57,6 +57,7 @@ import PrivateRoute from './utils/PrivateRoute';
 import Forgetpassword from "./public/pages/Forgetpassword";
 import ReserPasswordtoken from "./public/pages/ReserPasswordtoken";
 import ChangePAssword from "./public/pages/ChangePAssword";
+import ProtectedAuthRoute from "./utils/ProtectedAuthRoute";
 
 function App() {
   return (
@@ -67,8 +68,11 @@ function App() {
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/product" element={<Products />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedAuthRoute />} >
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+
+          </Route>
 
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
