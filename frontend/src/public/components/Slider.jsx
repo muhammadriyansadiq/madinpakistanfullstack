@@ -99,7 +99,7 @@ const SimpleSlider = () => {
         </div>
         <div className='h-[300px] lg:h-[700px] relative'>
           <h3 className=' '>
-          <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2019/10/01/27444-363961136_tiny.mp4" 
+          <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2022/11/26/140587-775389277_tiny.mp4" 
   ></video>
           </h3>
           <div className=' absolute top-[14%] left-[10%] text-[24px] lg:text-[30px] font-bold lg:top-[34%]'>New arrivals Alert</div>

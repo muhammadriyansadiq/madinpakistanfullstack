@@ -21,6 +21,10 @@ import Navcomp from "./Navcomp";
 import ViewCart from "./Navbarsubcomponent/ViewCart";
 import Wishlist from "./Navbarsubcomponent/Wishlist";
 import Inputsearchhome from "./Inputsearchhome";
+import axios from 'axios';
+import { useAuth } from '../../utils/AuthProvider';
+
+axios.defaults.withCredentials = true;
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const windowWidths = useSelector((state) => state.counter.windowwidth);
@@ -80,7 +84,7 @@ useEffect(() => {
     {
       key: '1',
       label: (
-        <button>Logout</button>
+        <button onClick={logoutfunction}>Logout</button>
       ),
     },
     {
@@ -338,6 +342,17 @@ function viewcartclosefunction(){
   dispatch(setviewcart(!viewcart))
 }
 
+async function logoutfunction(e){
+e.preventDefault()
+try{
+
+  const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/logout`);
+  console.log('Logout successful:', response);
+}
+catch (err){
+  console.log("error",err)
+}
+}
 
   return (
     <>
