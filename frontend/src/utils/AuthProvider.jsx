@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token); // Use decode function
-        console.log('Decoded User:', decoded); // Debug: Check decoded token
+        
         setUser(decoded);
       } catch (err) {
         console.error('Token decoding failed:', err);
@@ -21,9 +21,12 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  
+
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
