@@ -69,12 +69,12 @@ const SimpleSlider = () => {
         </div>
         <div className='h-[300px] lg:h-[700px] relative'>
           <h3 className=' '>
-          <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2020/06/23/42963-434316724_large.mp4" 
+          <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2019/01/04/20457-309694537_tiny.mp4" 
   ></video>
           </h3>
-          <div className=' absolute top-[14%] left-[10%] text-[24px] lg:text-[30px] font-bold lg:top-[34%]'>New arrivals Alert</div>
+          <div className=' absolute top-[14%] left-[10%] text-[24px] lg:text-[30px] font-bold lg:top-[34%] text-white'>New arrivals Alert</div>
 
-          <div className=' absolute top-[29%] lg:top-[45%]  left-[10%] text-[14px] lg:text-[24px] font-bold'>Fresh Styles for Every Season. Discover the Latest Trends Today!
+          <div className=' absolute top-[29%] lg:top-[45%]  left-[10%] text-[14px] lg:text-[24px] font-bold text-white'>Fresh Styles for Every Season. Discover the Latest Trends Today!
 
 </div>
 
@@ -84,12 +84,12 @@ const SimpleSlider = () => {
         </div>
         <div className='h-[300px] lg:h-[700px] relative'>
           <h3 className=' '>
-           <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2020/06/23/42963-434316724_large.mp4" 
+           <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2022/08/20/128564-741747704_tiny.mp4" 
   ></video>
           </h3>
-          <div className=' absolute top-[14%] left-[10%] text-[24px] lg:text-[30px] font-bold lg:top-[34%]'>New arrivals Alert</div>
+          <div className=' absolute top-[14%] left-[10%] text-[24px] lg:text-[30px] font-bold lg:top-[34%] text-white'>New arrivals Alert</div>
 
-          <div className=' absolute top-[29%] lg:top-[45%]  left-[10%] text-[14px] lg:text-[24px] font-bold'>Fresh Styles for Every Season. Discover the Latest Trends Today!
+          <div className=' absolute top-[29%] lg:top-[45%]  left-[10%] text-[14px] lg:text-[24px] font-bold text-white'>Fresh Styles for Every Season. Discover the Latest Trends Today!
 
 </div>
 
@@ -99,7 +99,7 @@ const SimpleSlider = () => {
         </div>
         <div className='h-[300px] lg:h-[700px] relative'>
           <h3 className=' '>
-          <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2020/06/23/42963-434316724_large.mp4" 
+          <video className="h-[250px] bg-black w-full lg:h-full" id="whatmore-video"  preload="metadata" loop playsInline autoPlay muted src="https://cdn.pixabay.com/video/2019/10/01/27444-363961136_tiny.mp4" 
   ></video>
           </h3>
           <div className=' absolute top-[14%] left-[10%] text-[24px] lg:text-[30px] font-bold lg:top-[34%]'>New arrivals Alert</div>

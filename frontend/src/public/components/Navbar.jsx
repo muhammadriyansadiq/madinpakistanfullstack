@@ -359,7 +359,7 @@ function viewcartclosefunction(){
                 </div>
                 <div className=" text-[10px] lg:text-[14px]">+9233122626227</div>
               </div>
-              <div className="border-2  xl:mx-0"></div>
+              <div className=" border-2  xl:mx-3 "></div>
               <div className="flex items-center cursor-pointer hover:text-green-700 text-[17px]">
                 <div className="pr-2 text-green-600 text-[16px]">
                   <IoMdMail />
