@@ -40,12 +40,11 @@ const Navbar = () => {
   const wishlistopen = useSelector((state) => state.counter.wishlistopen);
   const viewcart = useSelector((state) => state.counter.viewcart);
   const [hovered, Sethovered] = useState("");
-  const [profileshow,setprofileshow] = useState(localStorage.getItem("accessToken"))
   //setwishlistopen
 
   const dispatch = useDispatch();
-  const { user } = useAuth();
-  console.log("current user",user)
+  const { user,  setUser } = useAuth();
+  console.log("current user", user);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -323,29 +322,21 @@ const Navbar = () => {
 
   console.log("wishlistopen", wishlistopen);
 
-
   async function logoutfunction(e) {
-
     e.preventDefault();
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_KEY}/api/logout`
       );
       console.log("Logout successful:", response);
-      localStorage.removeItem("accessToken")
-      setprofileshow(localStorage.getItem("accessToken"))
-
+      localStorage.removeItem("accessToken");
+      setUser(null)
     } catch (err) {
       console.log("error", err);
     }
   }
 
-  useEffect(()=>{
-    
-    setprofileshow(localStorage.getItem("accessToken"))
-
-  },[profileshow])
-
+  
   return (
     <>
       {/* Top Home */}
@@ -403,31 +394,47 @@ const Navbar = () => {
                     </Link>
                   </div>
                   <div className="border-2 mr-2 xl:mr-0"></div>
-                  {profileshow?
-                  <div className="flex items-center cursor-pointer hover:text-green-700 text-[17px]">
-                    <Space direction="vertical">
-                      <Space wrap>
-                        <Dropdown
-                          menu={{
-                            items,
-                          }}
-                          placement="bottom"
-                        >
-                          <button>
-                            <img
-                              src="../../../public/IMG-20240712-WA0094-removebg-preview.png"
-                              className=" w-[100%] h-[40px]"
-                              alt=""
-                            />
-                          </button>
-                        </Dropdown>
+                  {user && (
+                    <div className="flex items-center cursor-pointer hover:text-green-700 text-[17px]">
+                      <Space direction="vertical">
+                        <Space wrap>
+                          <Dropdown
+                            menu={{
+                              items,
+                            }}
+                            placement="bottom"
+                          >
+                            <button>
+                              <img
+                                src="../../../public/IMG-20240712-WA0094-removebg-preview.png"
+                                className=" w-[100%] h-[40px]"
+                                alt=""
+                              />
+                            </button>
+                          </Dropdown>
+                        </Space>
                       </Space>
-                    </Space>
-                  </div>:
-                  <div className=" flex items-center "><Link to={'/register'} className=" text-green-400 font-bold cursor-pointer">Register</Link> <Link to={'/login'} className=" text-green-400 font-bold cursor-pointer mx-2">Login</Link>
-                  <CgProfile className=" text-[23px]"/>
+                    </div>
+                  )}
+                  {!user && (
+                    <div className=" flex items-center ">
+                    <Link
+                      to={"/register"}
+                      className=" text-green-400 font-bold cursor-pointer"
+                    >
+                      Register
+                    </Link>{" "}
+                    <Link
+                      to={"/login"}
+                      className=" text-green-400 font-bold cursor-pointer mx-2"
+                    >
+                      Login
+                    </Link>
+                    <CgProfile className=" text-[23px]" />
                   </div>
-                  }
+                  )}
+                    
+                 
                 </div>
               </div>
             </div>

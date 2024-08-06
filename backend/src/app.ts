@@ -52,6 +52,7 @@ app.use("/api", review )
 app.use("/api", addCategory )
 app.use('/api', addToWishList)
 app.use("/api", checkout )
+
 //this is error handling middleware
 
 app.use(errorHandler)

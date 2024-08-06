@@ -76,8 +76,7 @@ userSchema.pre<IUser>("save", async function (next) {
 
 
 userSchema.methods.isPasswordCorrect = async function (password: string): Promise<boolean> {
-    console.log("Password from user document:", this.password);
-    console.log("Password to compare:", password);
+    
     if (!this.password) {
         throw new Error("Password not set on user document");
     }
