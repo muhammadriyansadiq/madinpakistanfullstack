@@ -20,6 +20,7 @@ const Login = () => {
   });
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setLoading(true);
     console.log('Form submitted');
@@ -42,8 +43,8 @@ const Login = () => {
   
       setFormData({ email: '', password: '' });
     } catch (error) {
-      console.error('Error during login:', error.response.data);
-      setAuthErr(error.response.data.message);
+      console.error('Error during login:', error);
+      // setAuthErr(error.response.data.message);
       setLoading(false);
     }
   };
