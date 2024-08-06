@@ -27,7 +27,11 @@ const Login = () => {
   
     try {
 
-      const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/login`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/login`, formData,{
+        headers: {
+          Authorization : `Bearer ${localStorage.getItem("accessToken")}`
+        }
+      });
       console.log('Login successful:', response.data.data.user.role);
       let user = response.data.data.user;
       let accessToken = response.data.data.accessToken;
