@@ -192,31 +192,38 @@ const updateController = asyncHandler(
 const getController = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { title } = req.query;
-      const queryObject: { title?: { $regex: RegExp } } = {};
+      const { title, category, sort, priceOrder } = req.query;
 
-     
-
+      const queryObject: { title?: { $regex: RegExp }, category?: string } = {};
+        
       if (title) {
-        queryObject.title = { $regex: new RegExp(title as string, 'i') }; // Case-insensitive search for category
+        queryObject.title = { $regex: new RegExp(title as string, 'i') }; 
       }
+      if (category) {
+        queryObject.category = category as string;
+      }     
+      let sortOption: any = {};
 
+      if (sort) {
+        sortOption.title = sort === 'asc' ? 1 : -1;
+      }
       
+      if (priceOrder) {
+        sortOption.price = priceOrder === 'asc' ? 1 : -1;
+      }
+      const products = await Product.find(queryObject).sort(sortOption);
 
-      const product = await Product.find(queryObject);
-
-      if (!product.length) {
+      if (!products.length) {
         throw new ApiError(400, "Failed to get product");
       }
 
-      res
-        .status(200)
-        .json(new ApiResponse(200, product, "Data retrieved successfully"));
+      res.status(200).json(new ApiResponse(200, products, "Data retrieved successfully"));
     } catch (error: any) {
       next(error);
     }
   }
 );
+
 
 
 const deleteController = asyncHandler(
