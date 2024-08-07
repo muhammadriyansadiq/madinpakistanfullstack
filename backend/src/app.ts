@@ -13,7 +13,7 @@ app.use(cors({
 
 app.use(express())
 app.use(express.json())
-app.use(express.urlencoded({extended: false, limit: "16kv"}))
+app.use(express.urlencoded({extended: false, limit: "16kb"}))
 app.use(cookieParser())
 
 
