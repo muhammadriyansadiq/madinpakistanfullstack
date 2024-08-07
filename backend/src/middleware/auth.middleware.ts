@@ -5,13 +5,17 @@ import { ApiError } from '../utils/ApiError';
 import { CustomRequest } from '../utils/customRequest';  // Adjust the import path as needed
 
 export const verifyJWT = async (req: CustomRequest, res: Response, next: NextFunction) => {
+    
     const token = req.cookies.accessToken || req.headers.authorization?.split(' ')[1];
 
     if (!token) {
+
         throw new ApiError(401, 'Access token is required');
+    
     }
 
     try {
+        
         const decoded: any = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string);
         const user = await User.findById(decoded._id).select('-password -refreshToken');
 

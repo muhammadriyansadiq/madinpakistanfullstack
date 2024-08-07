@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import Copyright from "./Copyright";
-
+import axios from "axios";
+axios.defaults.withCredentials = true;
 const Adminproduct = () => {
   
   console.log("inner width", window.outerWidth);
@@ -36,7 +37,7 @@ const Adminproduct = () => {
 
 const [currentPage, setCurrentPage] = useState(1);
 const itemsPerPage = 5;
-
+const [productdata,setproductdata] = useState("")
 // Calculate the total number of pages
 const totalPages = Math.ceil(data.length / itemsPerPage);
 
@@ -50,6 +51,35 @@ const handleNextPage = () => {
 const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
 };
+
+useEffect(()=>{
+
+async function getproduct(){
+    try{
+        
+        const getcategorydata = await axios.get(`${import.meta.env.VITE_API_KEY}/api/product`);
+    
+      console.log("datatag",getcategorydata.data.data)
+
+      setproductdata(getcategorydata.data.data)
+
+      }
+      catch(err){
+  
+        console.log("error",err)
+  
+      }
+}
+
+
+
+getproduct()
+
+},[])
+
+
+console.log("productsdata",productdata)
+
   return (
     <div className="flex w-full ">
       {see ? (
@@ -94,7 +124,7 @@ const handlePreviousPage = () => {
                                     <thead>
                                         <tr className="bg-green-700 text-white leading-10 border-gray-500 border-[2px]">
                                             <th className="px-4 py-2 border-[1px] border-gray-400">SN</th>
-                                            <th className="px-4 py-2 border-[1px] border-gray-400">Title</th>
+                                            <th className="px-4 py-2 border-[1px] border-gray-400">Condition</th>
                                             <th className="px-4 py-2 border-[1px] border-gray-400">Category</th>
                                             <th className="px-4 py-2 border-[1px] border-gray-400">Is Featured</th>
                                             <th className="px-4 py-2 border-[1px] border-gray-400">Price</th>
@@ -109,28 +139,28 @@ const handlePreviousPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {currentItems.map((row, index) => (
+                                        {productdata &&  productdata.map((row, index) => (
                                             <tr key={index} className="border border-gray-300">
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col1}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col2}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{index +1}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.condition}</td>
                                                 <td className="px-4 py-2 border border-gray-300 text-center">{row.col3}</td>
                                                 <td className="px-4 py-2 border border-gray-300 text-center">{row.col4}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col5}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col6}</td> 
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col7}</td>
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col8}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{`${row.isFeature}`}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.discount}</td> 
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.price}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.quantity}</td>
 
                                                 <td className="px-4 py-2 border border-gray-300 text-center">
                                                     <div >
-                                                        <img src={row.col9} alt="logo" className=" object-cover h-[50px] w-full" />
+                                                        <img src={row.photo} alt="logo" className=" object-cover h-[50px] w-[50px]" />
                                                     </div>
                                                 </td>
 
-                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.col10}</td>
+                                                <td className="px-4 py-2 border border-gray-300 text-center">{row.status}</td>
 
-                                                <td className=" py-2 border border-gray-300 text-center">
+                                                <td className=" py-2 border border-gray-300 text-center px-1">
                                                     <div className='flex justify-around'>
-                                                    <Link to={'/admin/product/id/edit'} className="bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
+                                                    <Link to={'/admin/product/id/edit'} className="mr-2 bg-white rounded-lg border-[1px] border-green-700 text-[19px] p-2 text-green-700 hover:bg-green-700 hover:text-white"><FaRegEdit /></Link>
 
                                                         <Link to={'/orders/id'} className="bg-white rounded-lg border-[1px] border-red-500 text-[19px] p-2 text-red-500 hover:bg-red-500 hover:text-white"><MdDeleteForever /></Link>
                                                         </div>

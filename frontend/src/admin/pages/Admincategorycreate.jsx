@@ -64,7 +64,6 @@ const Adminbanneridedit = () => {
       const response = await axios.post(`${import.meta.env.VITE_API_KEY}/api/category`, formDataToSend);
       if (response.status === 200) {
         toast.success("Category edited successfully");
-
         // Reset form fields
         setFormData({
           title: '',
