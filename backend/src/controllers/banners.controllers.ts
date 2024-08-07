@@ -20,7 +20,7 @@ interface BannerRequestBody {
 const bannerControllers = asyncHandler(
   async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
-      const { title, description, bannerImage, status }: BannerRequestBody = req.body;
+      const { title, description, status }: BannerRequestBody = req.body;
       const avatarLocalPath = req.file?.path;
       if (!avatarLocalPath) {
         

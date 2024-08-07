@@ -89,10 +89,20 @@ const categoryController = asyncHandler(
   const getCategoryController = asyncHandler(
     async (req: CustomRequest, res: Response, next: NextFunction) => {
       try {
-        const payload = await Category.find();
+        const { title } = req.query;
+        const queryObject: { title?: { $regex: RegExp } } = {};
+  
+        if (title) {
+          queryObject.title = { $regex: new RegExp(title as string, 'i') }; 
+        }
+  
+        console.log('Query Object:', queryObject); 
+  
+        const payload = await Category.find(queryObject);
         if (!payload.length) {
           throw new ApiError(400, "No data found in category controller");
         }
+  
         return res
           .status(200)
           .json(new ApiResponse(200, payload, "Data retrieved successfully"));
@@ -101,6 +111,8 @@ const categoryController = asyncHandler(
       }
     }
   );
+  
+                                                                     
   
 
 export {categoryController, getCategoryController, updateCategoryController, deleteCategoryController}

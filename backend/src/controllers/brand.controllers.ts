@@ -26,7 +26,12 @@ const brandController = asyncHandler(async(req: CustomRequest, res : Response, n
 
 const getBrandController = asyncHandler(async(req: CustomRequest, res: Response, next: NextFunction)=>{
     try {
-        const payload = await Brand.find()
+        const {title} = req.query
+        const queryObject : {title?: {$regex : RegExp} }  = {}
+        if(title){
+            queryObject.title = { $regex : new RegExp(title as string, "i") }
+        }
+        const payload = await Brand.find(queryObject)
         if(!payload.length) throw new ApiError(400, "no data found in brand")
         return res.status(200).json(new ApiResponse(200, payload, "data retrieved successfully"))
     } catch (error) {
