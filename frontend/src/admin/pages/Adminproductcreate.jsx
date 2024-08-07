@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Navbar from './Navbar';
 import { Link } from "react-router-dom";
 import "../../App.css";
@@ -7,8 +7,53 @@ import { useSelector } from "react-redux";
 import Admindasjboardcomponents from "../components/Admindasjboardcomponents";
 import AdminNavbar from "../components/AdminNavbar";
 import Copyright from "./Copyright";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const Adminproductcreate = () => {
+const [category ,setcategoriesdata] = useState([])
+const [brand ,setbranddata] = useState([])
+const [sizeselect,setsizeselect] = useState([])
+let f = []
+useEffect( ()=>{
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_KEY}/api/category`);
+      setcategoriesdata(response.data.data);
+    } catch (error) {
+      console.error('Error fetching category:', error);
+    }
+  };
+
+  fetchCategories();
+  const fetchBrand = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_KEY}/api/brand`);
+      // setcategoriesdata(response.data.data);
+      console.log("response",response.data.data)
+      setbranddata(response.data.data)
+    } catch (error) {
+      console.error('Error fetching category:', error);
+    }
+  };
+
+  fetchBrand();
+ 
+},[])
+
+function sizefunction(e){
+
+e.preventDefault()
+console.log(e.target.value)
+
+// f.push(e.target.value)
+
+// setsizeselect(f)
+
+// console.log("sizeselect",sizeselect,"f",f)
+}
+
+
   const collapsed = useSelector((state) => state.counter.collapsed);
   const see = useSelector((state) => state.counter.see);
   const width = useSelector((state) => state.counter.width);
@@ -35,7 +80,7 @@ const Adminproductcreate = () => {
             <div className="w-full mt-2 border-[2px] rounded-md mb-8 bg-white">
               <div className="flex justify-between p-5 border-b-[1px] ">
                 <div className="font-sans font-medium text-gray-700 text-[21px]">
-                  Add Banner
+                  Add Product
                 </div>
               </div>
               <form action="">
@@ -109,9 +154,11 @@ const Adminproductcreate = () => {
                       className="px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full"
                     >
                       <option value="volvo">---select any category---</option>
-                      <option value="saab">mobile</option>
-                      <option value="saab">Madical</option>
-                      <option value="saab">grocery items</option>
+                     {category.map((data,ind)=>(
+                      <>                      
+                      <option key={ind}>{data.title}</option>
+                      </>
+))}
                     </select>
                   </div>
                 </div>
@@ -152,12 +199,23 @@ const Adminproductcreate = () => {
                     <select
                       name="cars"
                       id="select"
-                      className="px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full"
+                      className="px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full"                    
+                      onChange={sizefunction}
                     >
-                      <option value="volvo">---Nothing Selected---</option>
-                      <option value="saab">Small</option>
-                      <option value="saab">Mediuml</option>
-                      <option value="saab">Large</option>
+
+                      <option selected disabled > 
+---------   select    --------
+                        </option>
+                      <option value="small">
+                                 small       
+                      </option>
+                      <option value="medium">
+                               medium      
+                      </option>
+                      <option value="large">
+                            large         
+                      </option>
+
                     </select>
                   </div>
                 </div>
@@ -173,9 +231,14 @@ const Adminproductcreate = () => {
                       className="px-1 mt-2  py-3 leading-10 border-[1px] border-gray-500 rounded-md   w-full"
                     >
                       <option value="volvo">---select brand---</option>
-                      <option value="saab">Gulahmed</option>
-                      <option value="saab">engro</option>
-                      <option value="saab">fauji</option>
+                      {brand.map((data,ind)=>(
+                        <>
+                         <option value="volvo">
+                          {data.title}
+                         </option>
+
+                        </>
+                      ))}
                     </select>
                   </div>
                 </div>

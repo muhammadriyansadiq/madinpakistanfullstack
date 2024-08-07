@@ -10,6 +10,7 @@ router.post('/product', upload.fields([
     { name: 'video', maxCount: 1 }
 ]), postController);
 
+
 router.put('/product/:id', upload.fields([
     { name: 'photo', maxCount: 1 },
     { name: 'addMoreImages', maxCount: 10 },
