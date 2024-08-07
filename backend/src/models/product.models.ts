@@ -32,12 +32,12 @@ const productSchema : Schema<IProduct> = new Schema({
     description : {
         type: String,
         trime: true,
-        required: true
+        
     },
     isFeature:{
         type: Boolean,
         trim: true,
-        required: true
+        
     },
     price : {
         type: Number,
@@ -47,7 +47,7 @@ const productSchema : Schema<IProduct> = new Schema({
     discount : {
         type: Number,
         trime: true,
-        required: true
+       
     },
     size : {
         type: new Array,
@@ -57,7 +57,7 @@ const productSchema : Schema<IProduct> = new Schema({
     brand : {
         type: String,
         trime: true,
-        required: true
+        
     },
     condition : {
         type: String,
@@ -76,11 +76,11 @@ const productSchema : Schema<IProduct> = new Schema({
     },
     addMoreImages : {
         type: Array,
-        required: true
+        
     },
     video : {
         type: String,
-        required: true
+        
     },
     status:{
         type: String,
