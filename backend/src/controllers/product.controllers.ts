@@ -13,7 +13,7 @@ interface ProductionRequestBody {
   category: string;
   price: number;
   discount: number;
-  size: number;
+  size: string[];
   brand: string;
   condition: string;
   quantity: number;
@@ -192,20 +192,32 @@ const updateController = asyncHandler(
 const getController = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const product = await Product.find();
+      const { title } = req.query;
+      const queryObject: { title?: { $regex: RegExp } } = {};
+
+     
+
+      if (title) {
+        queryObject.title = { $regex: new RegExp(title as string, 'i') }; // Case-insensitive search for category
+      }
+
+      
+
+      const product = await Product.find(queryObject);
 
       if (!product.length) {
-        throw new ApiError(400, "failed to get product");
+        throw new ApiError(400, "Failed to get product");
       }
 
       res
         .status(200)
-        .json(new ApiResponse(200, product, "data retrieved successfully"));
-    } catch (error) {
+        .json(new ApiResponse(200, product, "Data retrieved successfully"));
+    } catch (error: any) {
       next(error);
     }
   }
 );
+
 
 const deleteController = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

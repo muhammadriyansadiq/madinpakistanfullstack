@@ -8,7 +8,7 @@ export interface IProduct extends Document {
     category: string;
     price: number;
     discount: number;
-    size: number;
+    size: [];
     brand: string;
     condition: string;
     quantity: number;
@@ -50,8 +50,8 @@ const productSchema : Schema<IProduct> = new Schema({
         required: true
     },
     size : {
-        type: Number,
-        trime: true,
+        type: new Array,
+        trim: true,
         required: true
     },
     brand : {
